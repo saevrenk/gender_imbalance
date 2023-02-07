@@ -6,6 +6,7 @@ import pandas as pd
 
 class connectAPI:
     def __init__(self, API, schema):
+        # initialize connection to API
         config = configparser.ConfigParser()
         config.read(os.path.dirname(__file__) + "/conf_api.ini")
         self.url = config.get(API, "url")
@@ -14,6 +15,7 @@ class connectAPI:
         self.attribute = schema
 
     def pages2list(self):
+        # Collect pages from the API endpoint and return a list of results
         response = requests.get(self.endpoint + f"?page=1").json()
         lst_results = response["results"]
         print(f"connected to {self.endpoint}")
