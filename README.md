@@ -7,5 +7,5 @@ Investigated the gender inbalance in movies. In particular, I collected data fro
 * **make_dashboard.py** connects to  the APIs, get data and create a dashboard with pie charts (See below).
 * **film_gender_inbalance.ipynb** has further visualizations.
 
+https://user-images.githubusercontent.com/105816821/223281365-f848b04b-d952-45bd-9fed-3d4429424750.mov
 
-![dashboard_view]("./images/ScreenRecording_2023-03-06.mov")
