@@ -18,7 +18,7 @@ class connectAPI:
             self.api_key = os.environ.get(self.token)
 
     def pages2list_tokenfree(self):
-        # Collect pages from the API endpoint and return a list of results
+        # Collect pages from the token-free API endpoint and return a list of results
         response = requests.get(self.endpoint + f"?page=1").json()
         lst_results = response["results"]
         print(f"connected to {self.endpoint}")
@@ -33,29 +33,30 @@ class connectAPI:
         return lst_results
 
     def pages2list_token(self):
-        g_dict = {0: "Not Specified", 1: "Female", 2: "Male", 3: "Non-Binary"}
+        # Collect pages from the API endpoint and return a list of results
+        genders = {0: "Not Specified", 1: "Female", 2: "Male", 3: "Non-Binary"}
         n_people = 10_000
         self.endpoint = self.url + self.attribute
         print(f"Connecting to {self.endpoint}")
-        gender_list = []
-        for i in range(1, n_people):
-            url = self.endpoint + "/" + str(i)
-            response = requests.get(
-                url,
-                params={"api_key": self.api_key, "language": "en_US"},
-            ).json()
-
-            if "gender" in response.keys():
-                res_movie_credits = requests.get(
-                    url + "/movie_credits?",
+        gender_list = [
+            {
+                "gender": genders[response["gender"]],
+                "n_credits": len(
+                    requests.get(
+                        f"{self.endpoint}/{i}/movie_credits",
+                        params={"api_key": self.api_key, "language": "en_US"},
+                    ).json()["cast"]
+                ),
+            }
+            for i in range(1, n_people)
+            if "gender"
+            in (
+                response := requests.get(
+                    f"{self.endpoint}/{i}",
                     params={"api_key": self.api_key, "language": "en_US"},
                 ).json()
-                gender_list.append(
-                    {
-                        "gender": g_dict[response["gender"]],
-                        "n_credits": len(res_movie_credits["cast"]),
-                    }
-                )
+            ).keys()
+        ]
 
         return gender_list
 
