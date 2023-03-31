@@ -13,6 +13,6 @@ In this repo:
 * **conf_api.ini** has the endpoints and specifications for the APIs.
 * **api_funcs.py** has the connectAPI class.
 * **make_dashboard.py** connects to  the APIs, get data and create a dashboard with pie charts as seen below.
-* **film_gender_imbalance.ipynb** has further analysis and visualizations.
+* **film_gender_imbalance.ipynb** has further analysis and visualizations. Unfortunately, the plotly graphs did not render properly here at GitHub, but it can be viewed [here](https://nbviewer.org/github/saevrenk/gender_imbalance/blob/main/film_gender_imbalance.ipynb)
 
 https://user-images.githubusercontent.com/105816821/223281365-f848b04b-d952-45bd-9fed-3d4429424750.mov
